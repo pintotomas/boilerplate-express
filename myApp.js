@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended: false}));
 // --> 7) Mount the Logger middleware here
 app.use(function middleware(req, res, next){
     var string = req.method + " " +req.path + " - " + req.ip;
@@ -48,6 +49,9 @@ app.route("/name")
     .get(function(req, res) {
         res.json({'name': req.query.first + " " + req.query.last});
 })
+    .post(function(req, res) {
+        res.json({'name': req.body.first + " " + req.body.last});
+    });
 
 
 
